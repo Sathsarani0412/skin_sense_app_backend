@@ -6,9 +6,7 @@ connection = sqlite3.connect(
 
 cursor = connection.cursor()
 
-# =========================================
-# USERS TABLE
-# =========================================
+
 
 cursor.execute("""
 
@@ -25,9 +23,7 @@ CREATE TABLE IF NOT EXISTS users(
 
 """)
 
-# =========================================
-# SKIN RESULTS TABLE
-# =========================================
+
 
 cursor.execute("""
 
