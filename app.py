@@ -8,25 +8,19 @@ import numpy as np
 import tensorflow as tf
 import pickle
 
-# =========================================
-# FLASK APP
-# =========================================
+
 
 app = Flask(__name__)
 CORS(app)
 
-# =========================================
-# LOAD MODEL
-# =========================================
+
 
 model = tf.saved_model.load("saved_skin_model")
 
 # GET PREDICTION FUNCTION
 infer = model.signatures["serving_default"]
 
-# =========================================
-# LOAD CLASS LABELS
-# =========================================
+
 
 with open("class_names.pkl", "rb") as f:
     class_names = pickle.load(f)
@@ -34,9 +28,7 @@ with open("class_names.pkl", "rb") as f:
 print("Model Loaded Successfully")
 print("Classes:", class_names)
 
-# =========================================
-# CREATE DATABASE
-# =========================================
+
 
 def create_tables():
 
@@ -74,9 +66,7 @@ def create_tables():
 
 create_tables()
 
-# =========================================
-# HOME ROUTE
-# =========================================
+
 
 @app.route("/")
 def home():
@@ -86,9 +76,7 @@ def home():
         "message": "SkinSense Backend Running"
     })
 
-# =========================================
-# SIGNUP
-# =========================================
+
 
 @app.route("/signup", methods=["POST"])
 def signup():
@@ -142,9 +130,7 @@ def signup():
             "message": str(e)
         })
 
-# =========================================
-# LOGIN
-# =========================================
+
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -189,9 +175,7 @@ def login():
             "message": str(e)
         })
 
-# =========================================
-# RESET PASSWORD
-# =========================================
+
 
 @app.route("/reset_password", methods=["POST"])
 def reset_password():
@@ -242,9 +226,7 @@ def reset_password():
             "message": str(e)
         })
 
-# =========================================
-# PREDICT ROUTE
-# =========================================
+
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -432,9 +414,7 @@ def predict():
             "message": str(e)
         })
 
-# =========================================
-# HISTORY ROUTE
-# =========================================
+
 
 @app.route("/history/<email>")
 def history(email):
@@ -495,9 +475,6 @@ def history(email):
             "message": str(e)
         })
 
-# =========================================
-# UPDATE PROFILE
-# =========================================
 
 @app.route("/update_profile", methods=["POST"])
 def update_profile():
@@ -547,9 +524,6 @@ def update_profile():
             "message": str(e)
         })
 
-# =========================================
-# RUN SERVER
-# =========================================
 
 if __name__ == "__main__":
 
